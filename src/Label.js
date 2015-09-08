@@ -24,12 +24,12 @@ L.Label = (L.Layer ? L.Layer : L.Class).extend({
 	show: function() {
 		this._hidden = false;
 		this.setOpacity(this.options.opacity);
-	};
+	},
 
 	hide: function() {
 		this._hidden = true;
 		this.setOpacity(0);
-	};
+	},
 
 	onAdd: function (map) {
 		this._map = map;
