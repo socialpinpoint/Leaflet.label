@@ -18,7 +18,18 @@ L.Label = (L.Layer ? L.Layer : L.Class).extend({
 		this._source = source;
 		this._animated = L.Browser.any3d && this.options.zoomAnimation;
 		this._isOpen = false;
+		this._hidden = false;
 	},
+
+	show: function() {
+		this._hidden = false;
+		this.setOpacity(this.options.opacity);
+	};
+
+	hide: function() {
+		this._hidden = true;
+		this.setOpacity(0);
+	};
 
 	onAdd: function (map) {
 		this._map = map;
@@ -222,6 +233,10 @@ L.Label = (L.Layer ? L.Layer : L.Class).extend({
 	},
 
 	_onMouseClick: function (e) {
+		if (this._hidden) {
+			return;
+		}
+
 		if (this.hasEventListeners(e.type)) {
 			L.DomEvent.stopPropagation(e);
 		}
@@ -232,6 +247,10 @@ L.Label = (L.Layer ? L.Layer : L.Class).extend({
 	},
 
 	_fireMouseEvent: function (e) {
+		if (this._hidden) {
+			return;
+		}
+
 		this.fire(e.type, {
 			originalEvent: e
 		});
