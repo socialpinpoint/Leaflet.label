@@ -34,11 +34,12 @@ L.Label = (L.Layer ? L.Layer : L.Class).extend({
 		this._animated = L.Browser.any3d && this.options.zoomAnimation;
 		this._isOpen = false;
 		this._hidden = false;
+		this._originalOpacity = this.options.opacity;
 	},
 
 	show: function() {
 		this._hidden = false;
-		this.setOpacity(this.options.opacity);
+		this.setOpacity(this._originalOpacity);
 	},
 
 	hide: function() {
